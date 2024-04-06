@@ -1,0 +1,84 @@
+1- apriori algorithm
+Prac1
+ins t a ll.packages ( ' arules' )
+ins tall.packages ( 'arulesViz' )
+library ( ' arul es ' )
+l i br ary( ' arulesViz ' )
+data(Groceries)
+summary(Groceries)
+itemsets <- apriori(Groceries, parameter;list(minlen=l, maxlen=l,
+support=0.02, target= 11 frequent itemsets11 ))
+surnrnary(iternsets)
+inspect(head(sort(iternsets, by = "support 11), 5))
+
+--arules: Mining Association Rules and Frequent Itemsets
+--Provides the infrastructure for representing, manipulating and analyzing --transaction data and patterns (frequent itemsets and association rules). 
+
+--arulesViz: Visualizing Association Rules and Frequent Itemsets. Extends package 'arules' with various visualization techniques for association rules and itemsets. 
+--The package also includes several interactive visualizations for rule exploration.
+//apriori :- Support,Confidence,Association
+00
+
+2- regression	
+Prac 2
+income_input = as.data.frame( read. csv ( 11C: /data/income. csv'')
+income_input
+summary(income_input)
+results<-lm(Income~Age+Education+Gender,income_input)
+Age<- 41
+Education<- 12
+Gender<- 0
+test_df=data.frame(Age,Education,Gender)
+test_df
+predicted_output<predict(results,test_df,level=0.95,interval="confidence")
+predicted_output
+
+
+
+
+3- decision tree
+Prac 3
+library("rpart")
+library("rpart.plot")
+install.packages("rpart.plot")
+library("rpart.plot")
+play_decision<read.table("E:/MScCS/BigData/wind.csv",header=TRUE,sep=",")
+play_decision
+dtree<rpart(Play~Outlook+Temperatue+Humidity+Wind,method="class",data=play_decision)
+new_data<-data.frame(Outlook= "rainy",Temperatue= "mild",Humidity= "high",Wind= FALSE)
+new_data
+predict(dtree,newdata=new_data,type="class")
+predict(dtree,newdata=new_data,type="prob")
+
+--What is a Decision Tree?
+--A decision tree is a very specific type of probability tree that enables you to make a decision about some kind of process. For example, you might want to choose --between manufacturing item A or item B, or investing in choice 1, choice 2, or choice 3. Trees are an excellent way to deal with these types of complex decisions, --which always involve many different factors and usually involve some degree of uncertainty.
+
+
+4- logistics regression
+Prac4
+install.packages("el071")
+library(el071)
+sample <- read. table ( 11 samplel . csv n , header= TRUE, sep= 11 , " )
+traindata <- as.data.frame(sample[1:14,])
+testdata <- as.data.frame(sample[15,])
+traindata
+testdata
+model <- naiveBayes(Enrolls Age+Income+JobSatisfaction+Desire, traindata)
+results <- predict (model,testdata)
+results
+
+
+--Logistic regression is a statistical model that in its basic form uses a logistic function to model a binary dependent variable, although many more complex --extensions exist. In regression analysis, logistic regression[1] (or logit regression) is estimating the parameters of a logistic model (a form of binary --regression).
+
+--Naive Bayes uses a similar method to predict the probability of different class based on various attributes. This algorithm is mostly used in text classification --and with problems having multiple classes 
+
+5- cluster
+Prac 5
+library(cluster)
+grade_input=as.data.frame(read.csv("c:/data/grades_km_input.csv"))
+km kmeans(kmdata,3, nstart=25)
+km
+
+Clustering is a broad set of techniques for finding subgroups of observations within a data set. When we cluster observations, we want observations in the same group to be similar and observations in different groups to be dissimilar. Because there isn’t a response variable, this is an unsupervised method, which implies that it seeks to find relationships between the 
+n
+ observations without being trained by a response variable. Clustering allows us to identify which observations are alike, and potentially categorize them therein. K-means clustering is the simplest and the most commonly used clustering method for splitting a dataset into a set of k groups.
