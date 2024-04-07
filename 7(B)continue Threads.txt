@@ -1,0 +1,10 @@
+from threading import Thread
+class MyThread(Thread):
+    def __init__(self):
+        Thread.__init__(self, name="Adit")
+
+    def run(self):
+        print("Hello, my name is %s" % self.name)
+
+process = MyThread()
+process.start()

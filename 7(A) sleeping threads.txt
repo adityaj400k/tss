@@ -1,0 +1,38 @@
+Description:In python, threads are a way to execute multiple tasks concurrently within a single process. Threads are lighteer then processes and share the same memmory space, making them suitable for tasks that are I/O. A thread ia an object like any other in that it can hold data, be run with methods, be stored in data structures, and be passed as parameters to methods.
+
+A thread can also be executed as a process, before it can execute, a thread's class must be implement run method.
+during its lifetime,a thread can be in various states. For doing programmes we use the function thread.start_new_thread().
+Threads can be created using the threading module and they allow for parallel execution of code blocks, enabling efficient multi-tasking. However, due to Global Interpreter Lock(GIL), threads in python are not suitable for cpu-bound tasks that require true parallelism.
+
+
+
+
+
+import random
+import time
+from threading import Thread
+
+class SleepyThread(Thread):
+    def __init__(self, number, sleepmax):
+        Thread.__init__(self, name='Thread' + str(number))
+        self.sleep_interval = random.randint(1, sleepmax)
+
+    def run(self):
+        print("%s, sleep interval: %d seconds\n" % \
+              (self.name, self.sleep_interval))
+        time.sleep(self.sleep_interval)
+        print("%s, waking up\n" % self.name)
+
+def main():
+    num_threads = int(input("Enter the number of threads: "))
+    sleep_max = int(input("Enter the maximum sleep time: "))
+
+    thread_list = []
+
+    for count in range(num_threads):
+        thread_list.append(SleepyThread(count + 1, sleep_max))
+
+    for thread in thread_list:
+        thread.start()
+
+main()
