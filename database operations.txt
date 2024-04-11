@@ -1,0 +1,66 @@
+import sqlite3
+
+# Open a connection to the database
+conn = sqlite3.connect('test.db')
+print("Opened database successfully")
+
+# Check if the table already exists
+cursor = conn.cursor()
+cursor.execute("SELECT name FROM sqlite_master WHERE type='table' AND name='COMPANY'")
+table_exists = cursor.fetchone()
+
+# Create the table only if it doesn't exist
+if not table_exists:
+    conn.execute('''CREATE TABLE COMPANY
+             (ID INT PRIMARY KEY NOT NULL,
+             NAME           TEXT    NOT NULL,
+             AGE            INT     NOT NULL,
+             ADDRESS        CHAR(50),
+             SALARY         REAL);''')
+    print("Table created successfully")
+else:
+    print("Table already exists")
+
+# Insert operation
+conn.execute("INSERT INTO COMPANY (ID, NAME, AGE, ADDRESS, SALARY) VALUES (1, 'Adit', 32, 'Australia', 20000.00 )")
+conn.execute("INSERT INTO COMPANY (ID, NAME, AGE, ADDRESS, SALARY) VALUES (2, 'swapnil', 25, 'Saudi Arabia', 15000.00 )")
+conn.execute("INSERT INTO COMPANY (ID, NAME, AGE, ADDRESS, SALARY) VALUES (3, 'Mridul', 23, 'United States', 20000.00 )")
+conn.execute("INSERT INTO COMPANY (ID, NAME, AGE, ADDRESS, SALARY) VALUES (4, 'Ajay', 25, 'India', 65000.00 )")
+
+conn.commit()
+print("Records created successfully")
+
+# Select operation
+cursor = conn.execute("SELECT id, name, address, salary from COMPANY")
+for row in cursor:
+    print("ID = ", row[0])
+    print("NAME = ", row[1])
+    print("ADDRESS = ", row[2])
+    print("SALARY = ", row[3], "\n")
+print("Operation done successfully")
+
+# Update operation
+conn.execute("UPDATE COMPANY set SALARY = 25000.00 where ID = 1")
+conn.commit()
+print("Total number of rows updated:", conn.total_changes)
+cursor = conn.execute("SELECT id, name, address, salary from COMPANY")
+for row in cursor:
+    print("ID = ", row[0])
+    print("NAME = ", row[1])
+    print("ADDRESS = ", row[2])
+    print("SALARY = ", row[3], "\n")
+print("Operation done successfully")
+
+# Delete operation
+conn.execute("DELETE from COMPANY where ID = 2")
+conn.commit()
+print("Total number of rows deleted:", conn.total_changes)
+cursor = conn.execute("SELECT id, name, address, salary from COMPANY")
+for row in cursor:
+    print("ID = ", row[0])
+    print("NAME = ", row[1])
+    print("ADDRESS = ", row[2])
+    print("SALARY = ", row[3], "\n")
+print("Operation done successfully")
+
+conn.close()

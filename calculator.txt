@@ -1,0 +1,61 @@
+import tkinter as tk
+
+def add():
+    m = int(t.get()) + int(t2.get())
+    label_result.config(text=m)
+
+def sub():
+    n = int(t.get()) - int(t2.get())
+    label_result.config(text=n)
+
+def multi():
+    o = int(t.get()) * int(t2.get())
+    label_result.config(text=o)
+
+def div():
+    p = int(t.get())
+    q = int(t2.get())
+    if q == 0:
+        label_result.config(text="Error: Division by zero")
+    else:
+        r = p / q
+        label_result.config(text=r)
+
+def clear():
+    t.delete(0, tk.END)
+    t2.delete(0, tk.END)
+    label_result.config(text="Result")
+
+w = tk.Tk()
+w.title("Calculator")
+w.geometry("330x350")
+
+t_label = tk.Label(w, text="Enter first number:", font=("Arial", 12, "bold"))
+t_label.grid(row=0, column=0, padx=10, pady=5)
+t = tk.Entry(w, font=("Arial", 12), width=10, fg="green")
+t.grid(row=0, column=1, padx=10, pady=5)
+
+t2_label = tk.Label(w, text="Enter second number:", font=("Arial", 12, "bold"))
+t2_label.grid(row=1, column=0, padx=10, pady=5)
+t2 = tk.Entry(w, font=("Arial", 12), width=10, fg="green")
+t2.grid(row=1, column=1, padx=10, pady=5)
+
+label_result = tk.Label(w, text="Result", font=("Arial", 12, "bold"), fg="blue")
+label_result.grid(row=2, column=0, columnspan=2, padx=10, pady=5)
+
+plus_button = tk.Button(w, text="+", command=add, font=("Arial", 12, "bold"), width=10, height=2)
+plus_button.grid(row=3, column=0, padx=10, pady=5)
+
+minus_button = tk.Button(w, text="-", command=sub, font=("Arial", 12, "bold"), width=10, height=2)
+minus_button.grid(row=3, column=1, padx=10, pady=5)
+
+multiply_button = tk.Button(w, text="*", command=multi, font=("Arial", 12, "bold"), width=10, height=2)
+multiply_button.grid(row=4, column=0, padx=10, pady=5)
+
+divide_button = tk.Button(w, text="/", command=div, font=("Arial", 12, "bold"), width=10, height=2)
+divide_button.grid(row=4, column=1, padx=10, pady=5)
+
+clear_button = tk.Button(w, text="Clear", command=clear, font=("Arial", 12, "bold"), width=10, height=2)
+clear_button.grid(row=5, column=0, columnspan=2, padx=10, pady=5)
+
+w.mainloop()
